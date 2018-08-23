@@ -11,3 +11,5 @@
 #   VS Generated files   #
 ##########################
 *.VC.db
+*.VC.db-shm
+*.VC.db-wal
