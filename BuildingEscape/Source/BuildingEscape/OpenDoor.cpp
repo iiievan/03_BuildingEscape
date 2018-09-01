@@ -19,6 +19,12 @@ void UOpenDoor::BeginPlay()
 {
 	Super::BeginPlay();
 
+	ActorThatOpens = GetWorld()->GetFirstPlayerController()->GetPawn();
+	
+}
+
+void UOpenDoor::OpenDoor()
+{
 	AActor* Owner = GetOwner();
 
 	FRotator NewRotation = FRotator(0.f, 20.f, 0.f);
@@ -26,12 +32,23 @@ void UOpenDoor::BeginPlay()
 	Owner->SetActorRotation(NewRotation);
 
 	FString ObjectName = GetOwner()->GetName(),
-		    ObjectRot = GetOwner()->GetTransform().GetRotation().ToString();
+		ObjectRot = GetOwner()->GetTransform().GetRotation().ToString();
 
 	UE_LOG(LogTemp, Warning, TEXT("%s is rotated at %s"), *ObjectName, *ObjectRot)
+}
 
-	// ...
-	
+void UOpenDoor::CloseDoor()
+{
+	AActor* Owner = GetOwner();
+
+	FRotator NewRotation = FRotator(0.f, 90.f, 0.f);
+
+	Owner->SetActorRotation(NewRotation);
+
+	FString ObjectName = GetOwner()->GetName(),
+		ObjectRot = GetOwner()->GetTransform().GetRotation().ToString();
+
+	UE_LOG(LogTemp, Warning, TEXT("%s is rotated at %s"), *ObjectName, *ObjectRot)
 }
 
 
@@ -40,6 +57,15 @@ void UOpenDoor::TickComponent(float DeltaTime, ELevelTick TickType, FActorCompon
 {
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
 
-	// ...
+	// Poll the TriggerVolume every frame
+	if (PressurePlate->IsOverlappingActor(ActorThatOpens))
+	{
+		OpenDoor();
+	}
+	else
+	{
+		CloseDoor();
+	}
+	
 }
 
