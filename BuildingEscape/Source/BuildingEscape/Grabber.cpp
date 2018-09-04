@@ -19,7 +19,9 @@ void UGrabber::BeginPlay()
 {
 	Super::BeginPlay();
 
-	// ...
+	FString ObjectName = GetOwner()->GetName();
+
+	UE_LOG(LogTemp, Warning, TEXT("Grabber reporting for %s"), *ObjectName);
 	
 }
 

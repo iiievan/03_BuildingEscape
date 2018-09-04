@@ -28,21 +28,23 @@ void UOpenDoor::BeginPlay()
 void UOpenDoor::OpenDoor()
 {
 	Owner->SetActorRotation(FRotator(0.f, (90.f - OpenAngle), 0.f));
-
+/*
 	FString ObjectName = GetOwner()->GetName(),
 		ObjectRot = GetOwner()->GetTransform().GetRotation().ToString();
 
 	UE_LOG(LogTemp, Warning, TEXT("%s is rotated at %s"), *ObjectName, *ObjectRot)
+*/
 }
 
 void UOpenDoor::CloseDoor()
 {
 	Owner->SetActorRotation(FRotator(0.f, 90.f, 0.f));
-
+/*
 	FString ObjectName = GetOwner()->GetName(),
 		ObjectRot = GetOwner()->GetTransform().GetRotation().ToString();
 
 	UE_LOG(LogTemp, Warning, TEXT("%s is rotated at %s"), *ObjectName, *ObjectRot)
+*/
 }
 
 
